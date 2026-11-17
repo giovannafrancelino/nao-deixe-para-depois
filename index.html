@@ -679,7 +679,7 @@
         <!-- ETAPA 4: Meu Plano de Ação Completo + Prompt de IA Integrado -->
         <div class="card-etapa" id="etapa-4">
             <h2 class="titulo-etapa">✨ Meu Plano de Ação Final</h2>
-            <p class="descricao-etapa">Aqui está o seu plano completo! Acompanhe o progresso, baixe para a agenda ou imprima.</p>
+            <p class="descricao-etapa">Aqui está o seu plano completo! Acompanhe o progresso, agende seus compromissos ou imprima.</p>
 
             <div class="painel-progresso">
                 <div class="topo-progresso">
@@ -698,7 +698,6 @@
             <div class="barra-acoes-final">
                 <div>
                     <button type="button" class="btn-secundario" onclick="irParaEtapa(2)">+ Adicionar Nova Meta</button>
-                    <button type="button" class="btn-secundario" onclick="exportarCalendarioICS()">📥 Baixar Calendário (.ics)</button>
                 </div>
                 <div>
                     <button type="button" class="btn-pdf" onclick="window.print()">🖨️ PDF</button>
@@ -733,7 +732,7 @@
     </div>
 
     <footer>
-        Cruzeiro do Sul Virtual • Sistemas de Informação • 2026
+        UNICID Virtual • Sistemas de Informação • 2026
     </footer>
 
     <script>
@@ -984,33 +983,6 @@
             var titulo = encodeURIComponent("NÃO DEIXE PRA DEPOIS - " + t.acao);
             var detalhes = encodeURIComponent("Área: " + t.area + "\nObjetivo: " + t.objetivo + "\nFrequência: " + t.frequencia);
             return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + titulo + "&dates=" + dataLimpa + "/" + dataLimpa + "&details=" + detalhes;
-        }
-
-        function exportarCalendarioICS() {
-            if (listaTarefas.length === 0) {
-                alert("Seu plano está vazio!");
-                return;
-            }
-            var icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nao Deixe Para Depois//PT\n";
-            for (var i = 0; i < listaTarefas.length; i++) {
-                var t = listaTarefas[i];
-                var d = t.prazo.replace(/-/g, "");
-                icsContent += "BEGIN:VEVENT\n";
-                icsContent += "SUMMARY:NÃO DEIXE PRA DEPOIS - " + t.acao + "\n";
-                icsContent += "DESCRIPTION:Area: " + t.area + " | Objetivo: " + t.objetivo + "\n";
-                icsContent += "DTSTART;VALUE=DATE:" + d + "\n";
-                icsContent += "DTEND;VALUE=DATE:" + d + "\n";
-                icsContent += "END:VEVENT\n";
-            }
-            icsContent += "END:VCALENDAR";
-
-            var blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-            var link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.setAttribute("download", "meu-plano-nao-deixe-pra-depois.ics");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
         }
 
         function alternarConclusao(id) {
