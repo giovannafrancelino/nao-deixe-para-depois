@@ -192,6 +192,19 @@
         .box-voce-sabia p { font-size: 12px; color: #2d3748; margin-bottom: 3px; }
         .box-voce-sabia small { font-size: 10px; color: #718096; font-style: italic; }
 
+        /* Comentário fofo do Zelo após selecionar a ação */
+        .comentario-zelo-acao {
+            background-color: #ebf8ff;
+            border: 1px solid #90cdf4;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #2b6cb0;
+            font-weight: bold;
+            display: none;
+        }
+
         .botoes-wizard {
             display: flex;
             justify-content: space-between;
@@ -390,6 +403,69 @@
 
         .vazio { text-align: center; padding: 25px; color: #a0aec0; font-size: 13px; }
 
+        /* Box de Integração com IA e Botões Diretos */
+        .caixa-prompt-ia {
+            background-color: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        .caixa-prompt-ia h4 {
+            color: #276749;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .caixa-prompt-ia p {
+            font-size: 12px;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        .bloco-codigo-prompt {
+            background-color: #ffffff;
+            border: 1px dashed #cbd5e0;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #4a5568;
+            word-break: break-all;
+            user-select: all;
+            margin-bottom: 10px;
+        }
+        .botoes-ia-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn-ia-chatgpt {
+            background-color: #10a37f;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .btn-ia-chatgpt:hover { background-color: #0e8c6d; }
+
+        .btn-ia-gemini {
+            background-color: #4285f4;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .btn-ia-gemini:hover { background-color: #3367d6; }
+
         .aviso-etico {
             max-width: 750px;
             margin: 20px auto;
@@ -415,10 +491,9 @@
             margin-top: auto;
         }
 
-        /* CONFIGURAÇÃO EXCLUSIVA PARA IMPRESSÃO / PDF: Sai apenas o Plano de Ação limpo! */
         @media print {
             body { background-color: #ffffff; }
-            .stepper, .botoes-wizard, .caixa-mascote, header, footer, .aviso-etico, .barra-acoes-final, .link-agenda, .btn-excluir, .card-etapa:not(#etapa-4) { display: none !important; }
+            .stepper, .botoes-wizard, .caixa-mascote, header, footer, .aviso-etico, .barra-acoes-final, .link-agenda, .btn-excluir, .card-etapa:not(#etapa-4), .caixa-prompt-ia { display: none !important; }
             #etapa-4 { display: block !important; box-shadow: none; border: none; padding: 0; width: 100%; margin: 0; }
             .item-plano { border: 1px solid #cbd5e0 !important; }
         }
@@ -510,6 +585,9 @@
                 <small id="fonteCuriosidade"></small>
             </div>
 
+            <!-- Comentário fofo e engraçado do Zelo baseado na escolha -->
+            <div id="comentarioZelo" class="comentario-zelo-acao"></div>
+
             <div class="campo">
                 <label for="sugestaoAcao">Escolha uma ação prática recomendada:</label>
                 <select id="sugestaoAcao" onchange="verificarAcaoPersonalizada()">
@@ -564,7 +642,7 @@
             </div>
         </div>
 
-        <!-- ETAPA 4: Meu Plano de Ação Completo -->
+        <!-- ETAPA 4: Meu Plano de Ação Completo + Prompt de IA com botões diretos -->
         <div class="card-etapa" id="etapa-4">
             <h2 class="titulo-etapa">✨ Meu Plano de Ação Final</h2>
             <p class="descricao-etapa">Aqui está o seu plano completo! Acompanhe o progresso, baixe para a agenda ou imprima.</p>
@@ -596,6 +674,17 @@
 
             <div id="listaPlano"></div>
 
+            <!-- Caixa de Integração com IA com os Botões Diretos -->
+            <div class="caixa-prompt-ia">
+                <h4>🤖 Quer que a IA te ajude a não deixar para depois?</h4>
+                <p>Copie o prompt abaixo e abra sua IA favorita para receber lembretes e apoio diário:</p>
+                <div class="bloco-codigo-prompt" id="textoPromptAI">Atue como meu coach de bem-estar pessoal. Com base no meu plano de autocuidado 'Não Deixe para Depois', me envie uma mensagem motivacional curta todos os dias às 18h me perguntando se consegui cumprir minhas metas!</div>
+                <div class="botoes-ia-container">
+                    <a href="https://chatgpt.com/" target="_blank" class="btn-ia-chatgpt">💬 Abrir ChatGPT</a>
+                    <a href="https://gemini.google.com/" target="_blank" class="btn-ia-gemini">✨ Abrir Gemini</a>
+                </div>
+            </div>
+
             <div class="botoes-wizard">
                 <button type="button" class="btn-acao btn-voltar" onclick="irParaEtapa(2)">⬅ Voltar</button>
                 <button type="button" class="btn-acao btn-proximo" onclick="alert('Plano concluído com sucesso! Pronto para apresentar na faculdade.')">Finalizar ✔️</button>
@@ -619,6 +708,7 @@
             "Hidratação": {
                 curiosidade: "A desidratação leve reduz o foco e aumenta o cansaço no ambiente de trabalho.",
                 fonte: "Fonte: Ministério da Saúde.",
+                comentarioFofo: "💧 Ótima escolha! Querendo perder a sensação de cansaço, um BRINDE! Pegue sua garrafa ou taça de água rsrs.",
                 sugestoes: [
                     "Deixar uma garrafa de 500ml na mesa e reabastecer 2x ao dia",
                     "Beber 1 copo de água logo ao acordar",
@@ -629,6 +719,7 @@
             "Bem-estar Emocional": {
                 curiosidade: "Pequenas pausas intencionais previnem a exaustão mental e o estresse profissional.",
                 fonte: "Fonte: OMS.",
+                comentarioFofo: "🧠 Mente sã, código rodando! Respirar fundo por 5 minutinhos não é perda de tempo, é investimento na sua sanidade mental.",
                 sugestoes: [
                     "Fazer pausa de 10 min longe de telas no intervalo",
                     "Praticar 5 minutos de respiração profunda",
@@ -639,6 +730,7 @@
             "Atividade Física": {
                 curiosidade: "A OMS recomenda 150 min semanais de atividade moderada para prevenir doenças cardiovasculares.",
                 fonte: "Fonte: OMS.",
+                comentarioFofo: "🏃 Bora mexer o esqueleto! Afinal, o único lugar onde a gente deve ficar sentado o dia todo é na cadeira da faculdade rsrs.",
                 sugestoes: [
                     "Caminhar 20 minutos no bairro ou parque",
                     "Fazer 10 minutos de alongamento pela manhã",
@@ -649,6 +741,7 @@
             "Descanso e Sono": {
                 curiosidade: "Evitar telas 30 minutos antes de dormir melhora drasticamente a produção de melatonina.",
                 fonte: "Fonte: Fiocruz / Ministério da Saúde.",
+                comentarioFofo: "😴 Chega de ficar scrollando o feed de madrugada! Seu cérebro merece desligar as telas para recarregar 100% amanhã.",
                 sugestoes: [
                     "Desligar o celular 30 min antes de deitar",
                     "Definir horário fixo para apagar as luzes",
@@ -659,6 +752,7 @@
             "Alimentação Equilibrada": {
                 curiosidade: "Priorizar alimentos in natura reduz o risco de hipertensão e diabetes.",
                 fonte: "Fonte: Guia Alimentar para a População Brasileira.",
+                comentarioFofo: "🥗 Nutrição de respeito! Descasque mais e desembale menos, porque combustível bom faz o sistema operar sem travamentos.",
                 sugestoes: [
                     "Incluir 1 fruta ou verdura no almoço",
                     "Evitar alimentos ultraprocessados no lanche",
@@ -669,6 +763,7 @@
             "Consultas Preventivas": {
                 curiosidade: "Campanhas como Outubro Rosa e Novembro Azul salvam vidas através do diagnóstico precoce.",
                 fonte: "Fonte: INCA / Ministério da Saúde.",
+                comentarioFofo: "📅 Prevenção é poder! Deixar a consulta em dia é o melhor 'patch de segurança' que você pode instalar na sua saúde.",
                 sugestoes: [
                     "Verificar data do último check-up e agendar consulta",
                     "Atualizar carteira de vacinação no posto de saúde",
@@ -679,6 +774,7 @@
             "Saúde Física": {
                 curiosidade: "Mudar a postura e caminhar a cada 1 hora evita dores crônicas na coluna lombar.",
                 fonte: "Fonte: Ministério da Saúde.",
+                comentarioFofo: "🩺 Coluna erguida, postura de dev de sucesso! Levanta, estica esses ombros e agradeça à sua lombar depois.",
                 sugestoes: [
                     "Levantar e alongar ombros a cada 1 hora sentado",
                     "Ajustar altura da cadeira e monitor",
@@ -688,7 +784,7 @@
             }
         };
 
-        var listaTarefas = JSON.parse(localStorage.getItem("plano_autocuidado_extensao_v6")) || [];
+        var listaTarefas = JSON.parse(localStorage.getItem("plano_autocuidado_extensao_v8")) || [];
 
         var amanha = new Date();
         amanha.setDate(amanha.getDate() + 1);
@@ -732,6 +828,7 @@
             var area = document.getElementById("area").value;
             var selectSugestao = document.getElementById("sugestaoAcao");
             var box = document.getElementById("boxVoceSabia");
+            var comentarioZelo = document.getElementById("comentarioZelo");
             var campoCustom = document.getElementById("campoPersonalizado");
 
             campoCustom.style.display = "none";
@@ -739,6 +836,7 @@
 
             if (area === "" || !dadosAutocuidado[area]) {
                 box.style.display = "none";
+                comentarioZelo.style.display = "none";
                 selectSugestao.innerHTML = '<option value="">Selecione a área primeiro...</option>';
                 return;
             }
@@ -747,6 +845,10 @@
             document.getElementById("textoCuriosidade").textContent = info.curiosidade;
             document.getElementById("fonteCuriosidade").textContent = info.fonte;
             box.style.display = "block";
+
+            // Mostra a frase fofa / engraçada do Zelo
+            comentarioZelo.textContent = info.comentarioFofo;
+            comentarioZelo.style.display = "block";
 
             var optP = document.createElement("option");
             optP.value = "";
@@ -821,13 +923,13 @@
             listaTarefas.unshift(novo);
             salvarEAtualizar();
 
-            // Limpa campos da Etapa 2 e 3 para permitir nova adição
             document.getElementById("objetivo").value = "";
             document.getElementById("acaoCustom").value = "";
             document.getElementById("campoPersonalizado").style.display = "none";
             document.getElementById("area").value = "";
             document.getElementById("sugestaoAcao").innerHTML = '<option value="">Selecione a área acima primeiro...</option>';
             document.getElementById("boxVoceSabia").style.display = "none";
+            document.getElementById("comentarioZelo").style.display = "none";
             return true;
         }
 
@@ -891,7 +993,7 @@
         }
 
         function salvarEAtualizar() {
-            localStorage.setItem("plano_autocuidado_extensao_v6", JSON.stringify(listaTarefas));
+            localStorage.setItem("plano_autocuidado_extensao_v8", JSON.stringify(listaTarefas));
             desenharTela();
         }
 
