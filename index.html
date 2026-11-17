@@ -495,6 +495,42 @@
         }
         .btn-ia-gemini:hover { background-color: #3367d6; }
 
+        /* Estilo da Nova Tela de Sucesso (Etapa 5) */
+        .tela-sucesso {
+            text-align: center;
+            padding: 20px 10px;
+        }
+        .icone-sucesso {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        .tela-sucesso h3 {
+            color: #2b6cb0;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .tela-sucesso p {
+            font-size: 14px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .caixa-recado-zelo {
+            background-color: #fff0f5;
+            border: 1px solid #f687b3;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 13px;
+            color: #702459;
+            margin-bottom: 25px;
+            text-align: left;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
         .aviso-etico {
             max-width: 750px;
             margin: 20px auto;
@@ -556,6 +592,10 @@
             <div class="step-indicator" id="indicator-4">
                 <div class="step-number">4</div>
                 Meu Plano
+            </div>
+            <div class="step-indicator" id="indicator-5">
+                <div class="step-number">✓</div>
+                Pronto
             </div>
         </div>
 
@@ -719,7 +759,29 @@
 
             <div class="botoes-wizard">
                 <button type="button" class="btn-acao btn-voltar" onclick="irParaEtapa(2)">⬅ Voltar</button>
-                <button type="button" class="btn-acao btn-proximo" onclick="alert('Plano salvo com sucesso em seu navegador!')">Finalizar ✔️</button>
+                <button type="button" class="btn-acao btn-proximo" onclick="irParaEtapa(5)">Finalizar ✔️</button>
+            </div>
+        </div>
+
+        <!-- ETAPA 5: Tela de Sucesso e Conclusão -->
+        <div class="card-etapa" id="etapa-5">
+            <div class="tela-sucesso">
+                <div class="icone-sucesso">🎉</div>
+                <h3>Parabéns! Este é o seu plano para não deixar para depois!</h3>
+                <p>Você deu o passo mais importante: transformou intenção em um compromisso real com a sua saúde e bem-estar.</p>
+
+                <div class="caixa-recado-zelo">
+                    <div style="font-size: 24px;">🤖</div>
+                    <div>
+                        <strong>Mensagem do Zelo:</strong><br>
+                        "Consistência vale muito mais do que perfeição. Lembre-se de cumprir suas microações diárias e conte comigo para te ajudar a manter o foco!"
+                    </div>
+                </div>
+
+                <div class="botoes-wizard" style="border-top: none; margin-top: 10px; padding-top: 0; justify-content: center;">
+                    <button type="button" class="btn-acao btn-voltar" onclick="irParaEtapa(4)">⬅ Voltar ao Meu Plano</button>
+                    <button type="button" class="btn-acao btn-proximo" onclick="irParaEtapa(1)">🔄 Criar Novo Ciclo</button>
+                </div>
             </div>
         </div>
 
@@ -829,13 +891,15 @@
             }
             document.getElementById('etapa-' + numEtapa).classList.add('ativa');
 
-            for (var j = 1; j <= 4; j++) {
+            for (var j = 1; j <= 5; j++) {
                 var ind = document.getElementById('indicator-' + j);
-                ind.classList.remove('active', 'completed');
-                if (j < numEtapa) {
-                    ind.classList.add('completed');
-                } else if (j === numEtapa) {
-                    ind.classList.add('active');
+                if(ind) {
+                    ind.classList.remove('active', 'completed');
+                    if (j < numEtapa) {
+                        ind.classList.add('completed');
+                    } else if (j === numEtapa) {
+                        ind.classList.add('active');
+                    }
                 }
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
