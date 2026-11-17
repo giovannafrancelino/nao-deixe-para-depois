@@ -192,7 +192,6 @@
         .box-voce-sabia p { font-size: 12px; color: #2d3748; margin-bottom: 3px; }
         .box-voce-sabia small { font-size: 10px; color: #718096; font-style: italic; }
 
-        /* Estilo Balão de Fala do Zelo (Diferente da caixa científica) */
         .balao-zelo {
             background-color: #ebf8ff;
             border: 1px solid #bee3f8;
@@ -532,8 +531,8 @@
 <body>
 
     <header>
-        <div class="selo-campanha">ODS 3 • Saúde e Bem-Estar | Outubro Rosa & Novembro Azul</div>
-        <h1>Não Deixe para Depois</h1>
+        <div class="selo-campanha">Não Deixe para Depois • Zelando pelo seu compromisso com a saúde</div>
+        <h1>Planejamento de Autocuidado</h1>
         <p class="slogan">Cuide de você hoje.</p>
         <p class="subtitulo-header">Muito se fala em prevenção. Transforme intenção em prática passo a passo.</p>
     </header>
@@ -571,7 +570,7 @@
                 </div>
                 <div class="fala-mascote">
                     <h4>Olá! Eu sou o Zelo, seu assistente de saúde!</h4>
-                    <p id="fraseMascote">Campanhas de prevenção acontecem o ano todo, mas o que te impede de agir hoje? Quais planos e hábitos está executando? </p>
+                    <p id="fraseMascote">Campanhas de prevenção acontecem o ano todo, mas o que te impede de agir hoje?</p>
                 </div>
             </div>
 
@@ -615,7 +614,6 @@
                 <small id="fonteCuriosidade"></small>
             </div>
 
-            <!-- Balão de Fala Diferenciado do Zelo -->
             <div id="comentarioZelo" class="balao-zelo">
                 <div class="balao-zelo-topo">
                     <div class="icone-zelo-mini">🤖</div>
@@ -678,7 +676,7 @@
             </div>
         </div>
 
-        <!-- ETAPA 4: Meu Plano de Ação Completo + Prompt de IA com botões diretos -->
+        <!-- ETAPA 4: Meu Plano de Ação Completo + Prompt de IA Integrado -->
         <div class="card-etapa" id="etapa-4">
             <h2 class="titulo-etapa">✨ Meu Plano de Ação Final</h2>
             <p class="descricao-etapa">Aqui está o seu plano completo! Acompanhe o progresso, baixe para a agenda ou imprima.</p>
@@ -711,9 +709,9 @@
             <div id="listaPlano"></div>
 
             <div class="caixa-prompt-ia">
-                <h4>🤖 Quer que a IA te ajude a não deixar para depois?</h4>
-                <p>Copie o prompt abaixo e abra sua IA favorita para receber lembretes e apoio diário:</p>
-                <div class="bloco-codigo-prompt" id="textoPromptAI">Atue como meu coach de bem-estar pessoal. Com base no meu plano de autocuidado 'Não Deixe para Depois', me envie uma mensagem motivacional curta todos os dias às 18h me perguntando se consegui cumprir minhas metas!</div>
+                <h4>🤖 Copie seu plano automatizado para a IA</h4>
+                <p>O prompt abaixo já inclui todas as suas metas cadastradas. Basta copiar e colar na sua IA favorita para receber apoio diário:</p>
+                <div class="bloco-codigo-prompt" id="textoPromptAI">Atue como meu coach de bem-estar pessoal. Meu plano de autocuidado 'Não Deixe para Depois' contém as seguintes metas: Nenhuma meta cadastrada. Me ajude a mantê-las!</div>
                 <div class="botoes-ia-container">
                     <a href="https://chatgpt.com/" target="_blank" class="btn-ia-chatgpt">💬 Abrir ChatGPT</a>
                     <a href="https://gemini.google.com/" target="_blank" class="btn-ia-gemini">✨ Abrir Gemini</a>
@@ -722,7 +720,7 @@
 
             <div class="botoes-wizard">
                 <button type="button" class="btn-acao btn-voltar" onclick="irParaEtapa(2)">⬅ Voltar</button>
-                <button type="button" class="btn-acao btn-proximo" onclick="alert('Plano concluído com sucesso! Pronto para apresentar no trabalho.')">Finalizar ✔️</button>
+                <button type="button" class="btn-acao btn-proximo" onclick="alert('Plano salvo com sucesso em seu navegador!')">Finalizar ✔️</button>
             </div>
         </div>
 
@@ -730,20 +728,20 @@
 
     <div class="aviso-etico">
         <div class="caixa-aviso">
-            <strong>Aviso Legal / Educativo:</strong> Plataforma organizacional voltada à promoção de hábitos saudáveis. Não realiza diagnósticos nem substitui acompanhamento médico.
+            <strong>Aviso Legal / Educativo:</strong> Plataforma organizacional voltada à promoção de hábitos saudáveis. Os dados são salvos exclusivamente no seu navegador (localStorage) e não são enviados a servidores externos. Não realiza diagnósticos nem substitui acompanhamento médico.
         </div>
     </div>
 
     <footer>
-        Projeto de Extensão IV • Sistemas de Informação • Cruzeiro do Sul • 2026
+        Cruzeiro do Sul Virtual • Sistemas de Informação • 2026
     </footer>
 
     <script>
         var dadosAutocuidado = {
             "Hidratação": {
                 curiosidade: "A desidratação leve reduz o foco e aumenta o cansaço no ambiente de trabalho.",
-                fonte: "Fonte: Ministério da Saúde.",
-                comentarioFofo: "💧 Um brinde a esta escolha! Levante sua garrafa de água rsrs.",
+                fonte: "Fonte: Ministério da Saúde. Disponível em: <a href='https://www.gov.br/saude' target='_blank'>Portal Gov.br</a>",
+                comentarioFofo: "💧 Um brinde a esta escolha! Levante garrafa de água rsrs.",
                 sugestoes: [
                     "Deixar uma garrafa de 500ml na mesa e reabastecer 2x ao dia",
                     "Beber 1 copo de água logo ao acordar",
@@ -753,7 +751,7 @@
             },
             "Bem-estar Emocional": {
                 curiosidade: "Pequenas pausas intencionais previnem a exaustão mental e o estresse profissional.",
-                fonte: "Fonte: OMS.",
+                fonte: "Fonte: Organização Mundial da Saúde (OMS). Disponível em: <a href='https://www.who.int' target='_blank'>WHO.int</a>",
                 comentarioFofo: "🧠 Mente sã, atividades rodando! Respirar fundo por 5 minutinhos não é perda de tempo, é investimento na sua sanidade mental.",
                 sugestoes: [
                     "Fazer pausa de 10 min longe de telas no intervalo",
@@ -764,7 +762,7 @@
             },
             "Atividade Física": {
                 curiosidade: "A OMS recomenda 150 min semanais de atividade moderada para prevenir doenças cardiovasculares.",
-                fonte: "Fonte: OMS.",
+                fonte: "Fonte: Organização Mundial da Saúde (OMS). Disponível em: <a href='https://www.who.int' target='_blank'>WHO.int</a>",
                 comentarioFofo: "🏃 Bora! Eu sei que a cadeira da sala de reuniões é confortável, mas já imaginou seu próprio corpo também te deixar confortável?",
                 sugestoes: [
                     "Caminhar 20 minutos no bairro ou parque",
@@ -775,7 +773,7 @@
             },
             "Descanso e Sono": {
                 curiosidade: "Evitar telas 30 minutos antes de dormir melhora drasticamente a produção de melatonina.",
-                fonte: "Fonte: Fiocruz / Ministério da Saúde.",
+                fonte: "Fonte: Fiocruz / Ministério da Saúde. Disponível em: <a href='https://portal.fiocruz.br' target='_blank'>Portal Fiocruz</a>",
                 comentarioFofo: "😴 Será que o seu celular/sua TV olha nos seus olhos mais do que a sua família? Seu cérebro merece desligar as telas para recarregar 100% amanhã.",
                 sugestoes: [
                     "Desligar o celular 30 min antes de deitar",
@@ -786,7 +784,7 @@
             },
             "Alimentação Equilibrada": {
                 curiosidade: "Priorizar alimentos in natura reduz o risco de hipertensão e diabetes.",
-                fonte: "Fonte: Guia Alimentar para a População Brasileira.",
+                fonte: "Fonte: Guia Alimentar para a População Brasileira / Ministério da Saúde.",
                 comentarioFofo: "🥗 Vontade de uma frutinha hoje? Descasque mais e desembale menos, porque combustível bom faz o dia render muito mais.",
                 sugestoes: [
                     "Incluir 1 fruta ou verdura no almoço",
@@ -797,7 +795,7 @@
             },
             "Consultas Preventivas": {
                 curiosidade: "Campanhas como Outubro Rosa e Novembro Azul salvam vidas através do diagnóstico precoce.",
-                fonte: "Fonte: INCA / Ministério da Saúde.",
+                fonte: "Fonte: INCA / Ministério da Saúde. Disponível em: <a href='https://www.gov.br/inca' target='_blank'>Portal INCA</a>",
                 comentarioFofo: "📅 Prevenção é poder! Deixar a consulta em dia é o melhor cuidado que você pode ter com o seu futuro. Mas é para marcar e comparecer de verdade, viu?",
                 sugestoes: [
                     "Verificar data do último check-up e agendar consulta",
@@ -808,7 +806,7 @@
             },
             "Saúde Física": {
                 curiosidade: "Mudar a postura e caminhar a cada 1 hora evita dores crônicas na coluna lombar.",
-                fonte: "Fonte: Ministério da Saúde.",
+                fonte: "Fonte: Ministério da Saúde. Disponível em: <a href='https://www.gov.br/saude' target='_blank'>Portal Gov.br</a>",
                 comentarioFofo: "🩺 Coluna erguida, postura de quem resolve tudo! Levanta, estica esses ombros e agradeça à sua lombar depois.",
                 sugestoes: [
                     "Levantar e alongar ombros a cada 1 hora sentado",
@@ -879,10 +877,9 @@
 
             var info = dadosAutocuidado[area];
             document.getElementById("textoCuriosidade").textContent = info.curiosidade;
-            document.getElementById("fonteCuriosidade").textContent = info.fonte;
+            document.getElementById("fonteCuriosidade").innerHTML = info.fonte;
             box.style.display = "block";
 
-            // Exibe o balão de fala do Zelo
             textoZeloNotif.textContent = info.comentarioFofo;
             comentarioZelo.style.display = "block";
 
@@ -1031,6 +1028,22 @@
         function salvarEAtualizar() {
             localStorage.setItem("plano_autocuidado_extensao_v8", JSON.stringify(listaTarefas));
             desenharTela();
+            atualizarPromptIA();
+        }
+
+        function atualizarPromptIA() {
+            var promptEl = document.getElementById("textoPromptAI");
+            if (listaTarefas.length === 0) {
+                promptEl.textContent = "Atue como meu coach de bem-estar pessoal. Meu plano 'Não Deixe para Depois' está vazio no momento. Me ajude a começar!";
+                return;
+            }
+            var resumo = "Atue como meu coach de bem-estar pessoal. Com base no meu plano de autocuidado 'Não Deixe para Depois', estas são as minhas metas cadastradas:\n";
+            for (var i = 0; i < listaTarefas.length; i++) {
+                var t = listaTarefas[i];
+                resumo += "- [" + t.area + "] " + t.acao + " (Objetivo: " + t.objetivo + " | Frequência: " + t.frequencia + ")\n";
+            }
+            resumo += "Me envie mensagens motivacionais e me ajude a cumprir essas metas diariamente!";
+            promptEl.textContent = resumo;
         }
 
         function desenharTela() {
@@ -1047,7 +1060,10 @@
             container.innerHTML = "";
 
             if (total === 0) {
-                container.innerHTML = '<div class="vazio">Seu plano está vazio.<br>Clique em <strong>"+ Adicionar Nova Meta"</strong> acima ou em <strong>"✨ Exemplo"</strong>.</div>';
+                var divVazio = document.createElement("div");
+                divVazio.className = "vazio";
+                divVazio.innerHTML = 'Seu plano está vazio.<br>Clique em <strong>"+ Adicionar Nova Meta"</strong> acima ou em <strong>"✨ Exemplo"</strong>.';
+                container.appendChild(divVazio);
                 return;
             }
 
@@ -1055,22 +1071,64 @@
                 var t = listaTarefas[j];
                 var div = document.createElement("div");
                 div.className = t.concluido ? "item-plano concluido" : "item-plano";
-                var link = gerarLinkGoogleAgenda(t);
+
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = t.concluido;
+                (function(idTask) {
+                    checkbox.onchange = function() { alternarConclusao(idTask); };
+                })(t.id);
+
+                var conteudoItem = document.createElement("div");
+                conteudoItem.className = "conteudo-item";
+
+                var spanEtiqueta = document.createElement("span");
+                spanEtiqueta.className = "etiqueta-area";
+                spanEtiqueta.textContent = t.area;
+
+                var divAcao = document.createElement("div");
+                divAcao.className = "texto-acao";
+                divAcao.textContent = t.acao;
+
+                var divObjetivo = document.createElement("div");
+                divObjetivo.className = "texto-objetivo";
+                divObjetivo.textContent = "Objetivo: " + t.objetivo;
+
+                var rodapeItem = document.createElement("div");
+                rodapeItem.className = "rodape-item";
+
+                var spanInfo = document.createElement("span");
+                spanInfo.style.color = "#4a5568";
                 var partesData = t.prazo.split("-");
                 var dataBR = partesData[2] + "/" + partesData[1] + "/" + partesData[0];
+                spanInfo.textContent = "🔄 " + t.frequencia + " • 📅 " + dataBR;
 
-                div.innerHTML =
-                    '<input type="checkbox" ' + (t.concluido ? 'checked' : '') + ' onchange="alternarConclusao(' + t.id + ')">' +
-                    '<div class="conteudo-item">' +
-                        '<span class="etiqueta-area">' + t.area + '</span>' +
-                        '<div class="texto-acao">' + t.acao + '</div>' +
-                        '<div class="texto-objetivo">Objetivo: ' + t.objetivo + '</div>' +
-                        '<div class="rodape-item">' +
-                            '<span style="color:#4a5568">🔄 ' + t.frequencia + ' • 📅 ' + dataBR + '</span>' +
-                            '<a href="' + link + '" target="_blank" class="link-agenda">📅 Agendar no Google Agenda</a>' +
-                        '</div>' +
-                    '</div>' +
-                    '<button type="button" class="btn-excluir" onclick="removerItem(' + t.id + ')">×</button>';
+                var linkAgenda = document.createElement("a");
+                linkAgenda.className = "link-agenda";
+                linkAgenda.href = gerarLinkGoogleAgenda(t);
+                linkAgenda.target = "_blank";
+                linkAgenda.textContent = "📅 Agendar no Google Agenda";
+
+                rodapeItem.appendChild(spanInfo);
+                rodapeItem.appendChild(linkAgenda);
+
+                conteudoItem.appendChild(spanEtiqueta);
+                conteudoItem.appendChild(divAcao);
+                conteudoItem.appendChild(divObjetivo);
+                conteudoItem.appendChild(rodapeItem);
+
+                var btnExcluir = document.createElement("button");
+                btnExcluir.type = "button";
+                btnExcluir.className = "btn-excluir";
+                btnExcluir.textContent = "×";
+                (function(idTask) {
+                    btnExcluir.onclick = function() { removerItem(idTask); };
+                })(t.id);
+
+                div.appendChild(checkbox);
+                div.appendChild(conteudoItem);
+                div.appendChild(btnExcluir);
+
                 container.appendChild(div);
             }
         }
@@ -1079,7 +1137,7 @@
             var hoje = new Date().toISOString().split("T")[0];
             var ex = [
                 { id: Date.now()+1, area: "Hidratação", acao: "Deixar garrafa de 500ml na mesa e beber 2x ao dia", objetivo: "Manter energia e foco", frequencia: "Todos os dias", prazo: hoje, concluido: true },
-                { id: Date.now()+2, area: "Consultas Preventivas", acao: "Verificar data do último check-up e agendar consulta", objetivo: "Prevenção Novembro Azul", frequencia: "Ação única", prazo: hoje, concluido: false }
+                { id: Date.now()+2, area: "Consultas Preventivas", acao: "Verificar data do último check-up e agendar consulta", objetivo: "Prevenção em dia", frequencia: "Ação única", prazo: hoje, concluido: false }
             ];
             listaTarefas = ex.concat(listaTarefas);
             salvarEAtualizar();
@@ -1087,6 +1145,7 @@
         }
 
         desenharTela();
+        atualizarPromptIA();
     </script>
 </body>
 </html>
