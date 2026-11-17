@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Não Deixe para Depois - Planejamento de Autocuidado</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f7f3f6;
+            color: #2c3e50;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2b6cb0 0%, #d53f8c 100%);
+            color: #ffffff;
+            padding: 22px 20px;
+            text-align: center;
+            border-bottom: 5px solid #ffed4a;
+        }
+
+        .selo-campanha {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        header h1 { font-size: 26px; margin-bottom: 2px; }
+        .slogan { font-size: 16px; color: #fed7e2; font-weight: bold; margin-bottom: 4px; }
+        .subtitulo-header { max-width: 650px; margin: 0 auto; font-size: 13px; opacity: 0.95; }
+
+        .container-wizard {
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 0 15px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .stepper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .step-indicator {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            font-size: 12px;
+            font-weight: bold;
+            color: #a0aec0;
+        }
+
+        .step-indicator.active { color: #2b6cb0; }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .step-indicator.active .step-number {
+            background-color: #2b6cb0;
+            color: white;
+            box-shadow: 0 0 10px rgba(43, 108, 176, 0.4);
+        }
+
+        .step-indicator.completed .step-number {
+            background-color: #d53f8c;
+            color: white;
+        }
+
+        .card-etapa {
+            background-color: #ffffff;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+            display: none;
+        }
+
+        .card-etapa.ativa { display: block; }
+
+        .titulo-etapa {
+            color: #2b6cb0;
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .descricao-etapa {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 20px;
+        }
+
+        .caixa-mascote {
+            background-color: #fff0f5;
+            border: 2px dashed #d53f8c;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-bichinho {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3182ce, #ed64a6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 3px 8px rgba(213, 63, 140, 0.3);
+        }
+
+        .fala-mascote h4 { color: #97266d; font-size: 14px; margin-bottom: 2px; }
+        .fala-mascote p { font-size: 12px; color: #4a5568; }
+
+        .campo { margin-bottom: 15px; }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #2d3748;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f7fafc;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3182ce;
+            background-color: #ffffff;
+        }
+
+        .linha-dupla {
+            display: flex;
+            gap: 12px;
+        }
+        .linha-dupla .campo { width: 50%; }
+
+        .box-voce-sabia {
+            background-color: #fff5f7;
+            border-left: 4px solid #d53f8c;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .box-voce-sabia strong { color: #b83280; font-size: 12px; display: block; margin-bottom: 3px; }
+        .box-voce-sabia p { font-size: 12px; color: #2d3748; margin-bottom: 3px; }
+        .box-voce-sabia small { font-size: 10px; color: #718096; font-style: italic; }
+
+        .balao-zelo {
+            background-color: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 15px;
+            display: none;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(49, 130, 206, 0.1);
+        }
+
+        .balao-zelo-topo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .icone-zelo-mini {
+            width: 24px;
+            height: 24px;
+            background-color: #3182ce;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .balao-zelo-topo span {
+            font-size: 12px;
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+
+        .balao-zelo p {
+            font-size: 13px;
+            color: #2d3748;
+            padding-left: 32px;
+        }
+
+        .botoes-wizard {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #edf2f7;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-acao {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-voltar { background-color: #edf2f7; color: #4a5568; }
+        .btn-voltar:hover { background-color: #e2e8f0; }
+
+        .btn-proximo { background-color: #2b6cb0; color: white; }
+        .btn-proximo:hover { background-color: #2c5282; }
+
+        .btn-concluir { background-color: #d53f8c; color: white; }
+        .btn-concluir:hover { background-color: #b83280; }
+
+        .botoes-enquete-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-opcao-enquete {
+            background-color: #f7fafc;
+            border: 2px solid #cbd5e0;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: bold;
+            color: #2d3748;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-opcao-enquete:hover, .btn-opcao-enquete.selecionado {
+            border-color: #2b6cb0;
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+        }
+
+        .painel-progresso {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 15px;
+        }
+
+        .topo-progresso {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .fundo-barra {
+            width: 100%;
+            height: 12px;
+            background-color: #edf2f7;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .preenchimento-barra {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3182ce, #ed64a6);
+            transition: width 0.3s;
+        }
+
+        .legenda-progresso {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .barra-acoes-final {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .btn-secundario {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            border: 1px solid #3182ce;
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-secundario:hover { background-color: #bee3f8; }
+
+        .btn-pdf {
+            background-color: #d53f8c;
+            color: #ffffff;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-pdf:hover { background-color: #b83280; }
+
+        .item-plano {
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #3182ce;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .item-plano.concluido {
+            background-color: #f7fafc;
+            border-left-color: #a0aec0;
+            opacity: 0.75;
+        }
+
+        .item-plano input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .conteudo-item { flex: 1; }
+
+        .etiqueta-area {
+            display: inline-block;
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .texto-acao { font-size: 15px; font-weight: bold; color: #2d3748; margin-bottom: 2px; }
+        .item-plano.concluido .texto-acao { text-decoration: line-through; color: #a0aec0; }
+        .texto-objetivo { font-size: 12px; color: #4a5568; margin-bottom: 6px; }
+
+        .rodape-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .link-agenda {
+            display: inline-block;
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            border: 1px solid #bee3f8;
+            text-decoration: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+        .link-agenda:hover { background-color: #bee3f8; }
+
+        .btn-excluir {
+            background: none; border: none; color: #cbd5e0; font-size: 16px; font-weight: bold; cursor: pointer;
+        }
+        .btn-excluir:hover { color: #e53e3e; }
+
+        .vazio { text-align: center; padding: 25px; color: #a0aec0; font-size: 13px; }
+
+        .caixa-prompt-ia {
+            background-color: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        .caixa-prompt-ia h4 {
+            color: #276749;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .caixa-prompt-ia p {
+            font-size: 12px;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        .bloco-codigo-prompt {
+            background-color: #ffffff;
+            border: 1px dashed #cbd5e0;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #4a5568;
+            word-break: break-all;
+            user-select: all;
+            margin-bottom: 10px;
+        }
+        .botoes-ia-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn-ia-chatgpt {
+            background-color: #10a37f;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .btn-ia-chatgpt:hover { background-color: #0e8c6d; }
+
+        .btn-ia-gemini {
+            background-color: #4285f4;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .btn-ia-gemini:hover { background-color: #3367d6; }
+
+        .aviso-etico {
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .caixa-aviso {
+            background-color: #fffaf0;
+            border-left: 4px solid #dd6b20;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #7b341e;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            font-size: 12px;
+            color: #718096;
+            margin-top: auto;
+        }
+
+        @media print {
+            body { background-color: #ffffff; }
+            .stepper, .botoes-wizard, .caixa-mascote, header, footer, .aviso-etico, .barra-acoes-final, .link-agenda, .btn-excluir, .card-etapa:not(#etapa-4), .caixa-prompt-ia { display: none !important; }
+            #etapa-4 { display: block !important; box-shadow: none; border: none; padding: 0; width: 100%; margin: 0; }
+            .item-plano { border: 1px solid #cbd5e0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="selo-campanha">Não Deixe para Depois • Zelando pelo seu compromisso com a saúde</div>
+        <h1>Planejamento de Autocuidado</h1>
+        <p class="slogan">Cuide de você hoje.</p>
+        <p class="subtitulo-header">Muito se fala em prevenção. Transforme intenção em prática passo a passo.</p>
+    </header>
+
+    <div class="container-wizard">
+
+        <!-- Indicador de Passos (Stepper) -->
+        <div class="stepper">
+            <div class="step-indicator active" id="indicator-1">
+                <div class="step-number">1</div>
+                Reflexão
+            </div>
+            <div class="step-indicator" id="indicator-2">
+                <div class="step-number">2</div>
+                Escolha
+            </div>
+            <div class="step-indicator" id="indicator-3">
+                <div class="step-number">3</div>
+                Detalhes
+            </div>
+            <div class="step-indicator" id="indicator-4">
+                <div class="step-number">4</div>
+                Meu Plano
+            </div>
+        </div>
+
+        <!-- ETAPA 1: Reflexão Inicial com o Zelo -->
+        <div class="card-etapa ativa" id="etapa-1">
+            <h2 class="titulo-etapa">💙🩷 Bem-vindo ao Autocuidado</h2>
+            <p class="descricao-etapa">Vamos começar entendendo o seu momento atual.</p>
+
+            <div class="caixa-mascote">
+                <div class="avatar-bichinho">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <div class="fala-mascote">
+                    <h4>Olá! Eu sou o Zelo, seu assistente de saúde!</h4>
+                    <p id="fraseMascote">Campanhas de prevenção acontecem o ano todo, mas o que te impede de agir hoje?</p>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>Selecione o seu principal desafio no dia a dia:</label>
+                <div class="botoes-enquete-grid">
+                    <button type="button" class="btn-opcao-enquete" onclick="selecionarDesafio(this, 'rotina')">1. Falta de rotina e correria no dia a dia</button>
+                    <button type="button" class="btn-opcao-enquete" onclick="selecionarDesafio(this, 'esquecimento')">2. Esquecimento de priorizar a própria saúde</button>
+                    <button type="button" class="btn-opcao-enquete" onclick="selecionarDesafio(this, 'comeco')">3. Não sei exatamente por onde começar</button>
+                </div>
+            </div>
+
+            <div class="botoes-wizard">
+                <div></div>
+                <button type="button" class="btn-acao btn-proximo" onclick="irParaEtapa(2)">Avançar para Escolha ➔</button>
+            </div>
+        </div>
+
+        <!-- ETAPA 2: Escolha da Área e Ação Prática -->
+        <div class="card-etapa" id="etapa-2">
+            <h2 class="titulo-etapa">🎯 Escolha da Área de Cuidado</h2>
+            <p class="descricao-etapa">Selecione uma área que deseja melhorar e veja sugestões validadas por órgãos de saúde.</p>
+
+            <div class="campo">
+                <label for="area">Qual área você quer cuidar melhor?</label>
+                <select id="area" onchange="atualizarSugestoes()">
+                    <option value="">Selecione uma área...</option>
+                    <option value="Hidratação">💧 Hidratação</option>
+                    <option value="Bem-estar Emocional">🧠 Bem-estar Emocional / Saúde Mental</option>
+                    <option value="Atividade Física">🏃 Atividade Física</option>
+                    <option value="Descanso e Sono">😴 Descanso e Sono</option>
+                    <option value="Alimentação Equilibrada">🥗 Alimentação Equilibrada</option>
+                    <option value="Consultas Preventivas">📅 Consultas e Exames Preventivos</option>
+                    <option value="Saúde Física">🩺 Saúde Física e Postura</option>
+                </select>
+            </div>
+
+            <div id="boxVoceSabia" class="box-voce-sabia">
+                <strong>📌 Você sabia? (Dado Científico / OMS)</strong>
+                <p id="textoCuriosidade"></p>
+                <small id="fonteCuriosidade"></small>
+            </div>
+
+            <div id="comentarioZelo" class="balao-zelo">
+                <div class="balao-zelo-topo">
+                    <div class="icone-zelo-mini">🤖</div>
+                    <span>Dica do Zelo:</span>
+                </div>
+                <p id="textoZeloNotif"></p>
+            </div>
+
+            <div class="campo">
+                <label for="sugestaoAcao">Escolha uma ação prática recomendada:</label>
+                <select id="sugestaoAcao" onchange="verificarAcaoPersonalizada()">
+                    <option value="">Selecione a área acima primeiro...</option>
+                </select>
+            </div>
+
+            <div class="campo" id="campoPersonalizado" style="display: none;">
+                <label for="acaoCustom">Digite sua ação personalizada:</label>
+                <input type="text" id="acaoCustom" placeholder="Ex: Caminhar 15 minutos no parque">
+            </div>
+
+            <div class="botoes-wizard">
+                <button type="button" class="btn-acao btn-voltar" onclick="irParaEtapa(1)">⬅ Voltar</button>
+                <button type="button" class="btn-acao btn-proximo" onclick="validarEtapa2()">Avançar ➔</button>
+            </div>
+        </div>
+
+        <!-- ETAPA 3: Detalhes, Objetivo e Prazos -->
+        <div class="card-etapa" id="etapa-3">
+            <h2 class="titulo-etapa">📅 Metas e Prazos</h2>
+            <p class="descricao-etapa">Defina o objetivo que você espera alcançar e a frequência da sua ação.</p>
+
+            <div class="campo">
+                <label for="objetivo">Qual resultado você busca com essa ação?</label>
+                <input type="text" id="objetivo" placeholder="Ex: Ter mais energia e foco no trabalho">
+            </div>
+
+            <div class="linha-dupla">
+                <div class="campo">
+                    <label for="frequencia">Frequência</label>
+                    <select id="frequencia">
+                        <option value="Todos os dias">Todos os dias</option>
+                        <option value="3x na semana">3x na semana</option>
+                        <option value="1x na semana">1x na semana</option>
+                        <option value="Ação única">Ação única</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="prazo">Data de Início</label>
+                    <input type="date" id="prazo">
+                </div>
+            </div>
+
+            <div class="botoes-wizard">
+                <button type="button" class="btn-acao btn-voltar" onclick="irParaEtapa(2)">⬅ Voltar</button>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" class="btn-acao btn-secundario" onclick="adicionarEContinuar()" style="background-color:#edf2f7; color:#2b6cb0; border:1px solid #3182ce;">+ Adicionar Outra</button>
+                    <button type="button" class="btn-acao btn-concluir" onclick="adicionarEVerPlano()">Ver Meu Plano ➔</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ETAPA 4: Meu Plano de Ação Completo + Prompt de IA Integrado -->
+        <div class="card-etapa" id="etapa-4">
+            <h2 class="titulo-etapa">✨ Meu Plano de Ação Final</h2>
+            <p class="descricao-etapa">Aqui está o seu plano completo! Acompanhe o progresso, agende seus compromissos ou imprima.</p>
+
+            <div class="painel-progresso">
+                <div class="topo-progresso">
+                    <span>Evolução do Plano</span>
+                    <span id="textoPorcentagem" style="color: #2b6cb0;">0%</span>
+                </div>
+                <div class="fundo-barra">
+                    <div class="preenchimento-barra" id="barraProgresso"></div>
+                </div>
+                <div class="legenda-progresso">
+                    <span id="contagemTarefas">0 de 0 concluídas</span>
+                    <span id="mensagemIncentivo">Não deixe para depois!</span>
+                </div>
+            </div>
+
+            <div class="barra-acoes-final">
+                <div>
+                    <button type="button" class="btn-secundario" onclick="irParaEtapa(2)">+ Adicionar Nova Meta</button>
+                </div>
+                <div>
+                    <button type="button" class="btn-pdf" onclick="window.print()">🖨️ PDF</button>
+                    <button type="button" class="btn-secundario" onclick="carregarExemplo()">✨ Exemplo</button>
+                </div>
+            </div>
+
+            <div id="listaPlano"></div>
+
+            <div class="caixa-prompt-ia">
+                <h4>🤖 Copie seu plano automatizado para a IA</h4>
+                <p>O prompt abaixo já inclui todas as suas metas cadastradas. Basta copiar e colar na sua IA favorita para receber apoio diário:</p>
+                <div class="bloco-codigo-prompt" id="textoPromptAI">Atue como meu coach de bem-estar pessoal. Meu plano de autocuidado 'Não Deixe para Depois' contém as seguintes metas: Nenhuma meta cadastrada. Me ajude a mantê-las!</div>
+                <div class="botoes-ia-container">
+                    <a href="https://chatgpt.com/" target="_blank" class="btn-ia-chatgpt">💬 Abrir ChatGPT</a>
+                    <a href="https://gemini.google.com/" target="_blank" class="btn-ia-gemini">✨ Abrir Gemini</a>
+                </div>
+            </div>
+
+            <div class="botoes-wizard">
+                <button type="button" class="btn-acao btn-voltar" onclick="irParaEtapa(2)">⬅ Voltar</button>
+                <button type="button" class="btn-acao btn-proximo" onclick="alert('Plano salvo com sucesso em seu navegador!')">Finalizar ✔️</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="aviso-etico">
+        <div class="caixa-aviso">
+            <strong>Aviso Legal / Educativo:</strong> Plataforma organizacional voltada à promoção de hábitos saudáveis. Os dados são salvos exclusivamente no seu navegador (localStorage) e não são enviados a servidores externos. Não realiza diagnósticos nem substitui acompanhamento médico.
+        </div>
+    </div>
+
+    <footer>
+        UNICID Virtual • Sistemas de Informação • 2026
+    </footer>
+
+    <script>
+        var dadosAutocuidado = {
+            "Hidratação": {
+                curiosidade: "A desidratação leve reduz o foco e aumenta o cansaço no ambiente de trabalho.",
+                fonte: "Fonte: Ministério da Saúde. Disponível em: <a href='https://www.gov.br/saude' target='_blank'>Portal Gov.br</a>",
+                comentarioFofo: "💧 Um brinde a esta escolha! Levante garrafa de água rsrs.",
+                sugestoes: [
+                    "Deixar uma garrafa de 500ml na mesa e reabastecer 2x ao dia",
+                    "Beber 1 copo de água logo ao acordar",
+                    "Substituir 1 refrigerante por água hoje",
+                    "Usar alarme no celular a cada 2h para beber água"
+                ]
+            },
+            "Bem-estar Emocional": {
+                curiosidade: "Pequenas pausas intencionais previnem a exaustão mental e o estresse profissional.",
+                fonte: "Fonte: Organização Mundial da Saúde (OMS). Disponível em: <a href='https://www.who.int' target='_blank'>WHO.int</a>",
+                comentarioFofo: "🧠 Mente sã, atividades rodando! Respirar fundo por 5 minutinhos não é perda de tempo, é investimento na sua sanidade mental.",
+                sugestoes: [
+                    "Fazer pausa de 10 min longe de telas no intervalo",
+                    "Praticar 5 minutos de respiração profunda",
+                    "Desligar notificações de trabalho após o expediente",
+                    "Reservar 30 min para um hobby favorito"
+                ]
+            },
+            "Atividade Física": {
+                curiosidade: "A OMS recomenda 150 min semanais de atividade moderada para prevenir doenças cardiovasculares.",
+                fonte: "Fonte: Organização Mundial da Saúde (OMS). Disponível em: <a href='https://www.who.int' target='_blank'>WHO.int</a>",
+                comentarioFofo: "🏃 Bora! Eu sei que a cadeira da sala de reuniões é confortável, mas já imaginou seu próprio corpo também te deixar confortável?",
+                sugestoes: [
+                    "Caminhar 20 minutos no bairro ou parque",
+                    "Fazer 10 minutos de alongamento pela manhã",
+                    "Substituir o elevador por escadas em andares curtos",
+                    "Caminhar durante ligações telefônicas"
+                ]
+            },
+            "Descanso e Sono": {
+                curiosidade: "Evitar telas 30 minutos antes de dormir melhora drasticamente a produção de melatonina.",
+                fonte: "Fonte: Fiocruz / Ministério da Saúde. Disponível em: <a href='https://portal.fiocruz.br' target='_blank'>Portal Fiocruz</a>",
+                comentarioFofo: "😴 Será que o seu celular/sua TV olha nos seus olhos mais do que a sua família? Seu cérebro merece desligar as telas para recarregar 100% amanhã.",
+                sugestoes: [
+                    "Desligar o celular 30 min antes de deitar",
+                    "Definir horário fixo para apagar as luzes",
+                    "Evitar cafeína após as 16h",
+                    "Preparar ambiente escuro e silencioso"
+                ]
+            },
+            "Alimentação Equilibrada": {
+                curiosidade: "Priorizar alimentos in natura reduz o risco de hipertensão e diabetes.",
+                fonte: "Fonte: Guia Alimentar para a População Brasileira / Ministério da Saúde.",
+                comentarioFofo: "🥗 Vontade de uma frutinha hoje? Descasque mais e desembale menos, porque combustível bom faz o dia render muito mais.",
+                sugestoes: [
+                    "Incluir 1 fruta ou verdura no almoço",
+                    "Evitar alimentos ultraprocessados no lanche",
+                    "Fazer refeições longe do computador",
+                    "Reduzir o consumo de sal embutido"
+                ]
+            },
+            "Consultas Preventivas": {
+                curiosidade: "Campanhas como Outubro Rosa e Novembro Azul salvam vidas através do diagnóstico precoce.",
+                fonte: "Fonte: INCA / Ministério da Saúde. Disponível em: <a href='https://www.gov.br/inca' target='_blank'>Portal INCA</a>",
+                comentarioFofo: "📅 Prevenção é poder! Deixar a consulta em dia é o melhor cuidado que você pode ter com o seu futuro. Mas é para marcar e comparecer de verdade, viu?",
+                sugestoes: [
+                    "Verificar data do último check-up e agendar consulta",
+                    "Atualizar carteira de vacinação no posto de saúde",
+                    "Agendar avaliação odontológica preventiva",
+                    "Organizar exames anteriores em uma pasta"
+                ]
+            },
+            "Saúde Física": {
+                curiosidade: "Mudar a postura e caminhar a cada 1 hora evita dores crônicas na coluna lombar.",
+                fonte: "Fonte: Ministério da Saúde. Disponível em: <a href='https://www.gov.br/saude' target='_blank'>Portal Gov.br</a>",
+                comentarioFofo: "🩺 Coluna erguida, postura de quem resolve tudo! Levanta, estica esses ombros e agradeça à sua lombar depois.",
+                sugestoes: [
+                    "Levantar e alongar ombros a cada 1 hora sentado",
+                    "Ajustar altura da cadeira e monitor",
+                    "Verificar postura ao usar o celular",
+                    "Fazer exercício de descanso visual para os olhos"
+                ]
+            }
+        };
+
+        var listaTarefas = JSON.parse(localStorage.getItem("plano_autocuidado_extensao_v8")) || [];
+
+        var amanha = new Date();
+        amanha.setDate(amanha.getDate() + 1);
+        document.getElementById("prazo").value = amanha.toISOString().split("T")[0];
+
+        function irParaEtapa(numEtapa) {
+            var etapas = document.querySelectorAll('.card-etapa');
+            for (var i = 0; i < etapas.length; i++) {
+                etapas[i].classList.remove('ativa');
+            }
+            document.getElementById('etapa-' + numEtapa).classList.add('ativa');
+
+            for (var j = 1; j <= 4; j++) {
+                var ind = document.getElementById('indicator-' + j);
+                ind.classList.remove('active', 'completed');
+                if (j < numEtapa) {
+                    ind.classList.add('completed');
+                } else if (j === numEtapa) {
+                    ind.classList.add('active');
+                }
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selecionarDesafio(btn, motivo) {
+            var botoes = document.querySelectorAll('.btn-opcao-enquete');
+            for(var i=0; i<botoes.length; i++) { botoes[i].classList.remove('selecionado'); }
+            btn.classList.add('selecionado');
+
+            var frase = document.getElementById('fraseMascote');
+            if (motivo === 'rotina') {
+                frase.textContent = "👉 O ZELO RECOMENDA: microações de 10 minutos diários vencem qualquer falta de rotina!";
+            } else if (motivo === 'esquecimento') {
+                frase.textContent = "👉 O ZELO RESOLVE: use o botão do calendário ao final para criar alertas no celular!";
+            } else if (motivo === 'comeco') {
+                frase.textContent = "👉 O ZELO FACILITA: escolha uma área na próxima etapa e use nossas sugestões prontas!";
+            }
+        }
+
+        function atualizarSugestoes() {
+            var area = document.getElementById("area").value;
+            var selectSugestao = document.getElementById("sugestaoAcao");
+            var box = document.getElementById("boxVoceSabia");
+            var comentarioZelo = document.getElementById("comentarioZelo");
+            var textoZeloNotif = document.getElementById("textoZeloNotif");
+            var campoCustom = document.getElementById("campoPersonalizado");
+
+            campoCustom.style.display = "none";
+            selectSugestao.innerHTML = "";
+
+            if (area === "" || !dadosAutocuidado[area]) {
+                box.style.display = "none";
+                comentarioZelo.style.display = "none";
+                selectSugestao.innerHTML = '<option value="">Selecione a área primeiro...</option>';
+                return;
+            }
+
+            var info = dadosAutocuidado[area];
+            document.getElementById("textoCuriosidade").textContent = info.curiosidade;
+            document.getElementById("fonteCuriosidade").innerHTML = info.fonte;
+            box.style.display = "block";
+
+            textoZeloNotif.textContent = info.comentarioFofo;
+            comentarioZelo.style.display = "block";
+
+            var optP = document.createElement("option");
+            optP.value = "";
+            optP.textContent = "Selecione uma sugestão...";
+            selectSugestao.appendChild(optP);
+
+            for (var i = 0; i < info.sugestoes.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = info.sugestoes[i];
+                opt.textContent = info.sugestoes[i];
+                selectSugestao.appendChild(opt);
+            }
+
+            var optOutra = document.createElement("option");
+            optOutra.value = "CUSTOM";
+            optOutra.textContent = "✏️ Digitar minha própria ação";
+            selectSugestao.appendChild(optOutra);
+        }
+
+        function verificarAcaoPersonalizada() {
+            var val = document.getElementById("sugestaoAcao").value;
+            var custom = document.getElementById("campoPersonalizado");
+            var inputCustom = document.getElementById("acaoCustom");
+            if (val === "CUSTOM") {
+                custom.style.display = "block";
+                inputCustom.required = true;
+            } else {
+                custom.style.display = "none";
+                inputCustom.required = false;
+            }
+        }
+
+        function validarEtapa2() {
+            var area = document.getElementById("area").value;
+            var sug = document.getElementById("sugestaoAcao").value;
+            if (!area) {
+                alert("Por favor, selecione uma área de autocuidado.");
+                return;
+            }
+            if (!sug) {
+                alert("Por favor, selecione uma ação prática.");
+                return;
+            }
+            irParaEtapa(3);
+        }
+
+        function salvarNovaAcaoDoFormulario() {
+            var area = document.getElementById("area").value;
+            var sug = document.getElementById("sugestaoAcao").value;
+            var acaoFinal = sug === "CUSTOM" ? document.getElementById("acaoCustom").value.trim() : sug;
+            var objetivo = document.getElementById("objetivo").value.trim();
+
+            if (!acaoFinal) {
+                alert("Informe a ação prática.");
+                return false;
+            }
+            if (!objetivo) {
+                alert("Informe o objetivo que você busca.");
+                return false;
+            }
+
+            var novo = {
+                id: Date.now(),
+                area: area,
+                acao: acaoFinal,
+                objetivo: objetivo,
+                frequencia: document.getElementById("frequencia").value,
+                prazo: document.getElementById("prazo").value,
+                concluido: false
+            };
+
+            listaTarefas.unshift(novo);
+            salvarEAtualizar();
+
+            document.getElementById("objetivo").value = "";
+            document.getElementById("acaoCustom").value = "";
+            document.getElementById("campoPersonalizado").style.display = "none";
+            document.getElementById("area").value = "";
+            document.getElementById("sugestaoAcao").innerHTML = '<option value="">Selecione a área acima primeiro...</option>';
+            document.getElementById("boxVoceSabia").style.display = "none";
+            document.getElementById("comentarioZelo").style.display = "none";
+            return true;
+        }
+
+        function adicionarEContinuar() {
+            if (salvarNovaAcaoDoFormulario()) {
+                alert("Ação adicionada ao plano! Você pode cadastrar outra agora.");
+                irParaEtapa(2);
+            }
+        }
+
+        function adicionarEVerPlano() {
+            if (salvarNovaAcaoDoFormulario()) {
+                irParaEtapa(4);
+            }
+        }
+
+        function gerarLinkGoogleAgenda(t) {
+            var dataLimpa = t.prazo.replace(/-/g, "");
+            var titulo = encodeURIComponent("NÃO DEIXE PRA DEPOIS - " + t.acao);
+            var detalhes = encodeURIComponent("Área: " + t.area + "\nObjetivo: " + t.objetivo + "\nFrequência: " + t.frequencia);
+            return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + titulo + "&dates=" + dataLimpa + "/" + dataLimpa + "&details=" + detalhes;
+        }
+
+        function alternarConclusao(id) {
+            for (var i = 0; i < listaTarefas.length; i++) {
+                if (listaTarefas[i].id === id) listaTarefas[i].concluido = !listaTarefas[i].concluido;
+            }
+            salvarEAtualizar();
+        }
+
+        function removerItem(id) {
+            listaTarefas = listaTarefas.filter(function(t) { return t.id !== id; });
+            salvarEAtualizar();
+        }
+
+        function salvarEAtualizar() {
+            localStorage.setItem("plano_autocuidado_extensao_v8", JSON.stringify(listaTarefas));
+            desenharTela();
+            atualizarPromptIA();
+        }
+
+        function atualizarPromptIA() {
+            var promptEl = document.getElementById("textoPromptAI");
+            if (listaTarefas.length === 0) {
+                promptEl.textContent = "Atue como meu coach de bem-estar pessoal. Meu plano 'Não Deixe para Depois' está vazio no momento. Me ajude a começar!";
+                return;
+            }
+            var resumo = "Atue como meu coach de bem-estar pessoal. Com base no meu plano de autocuidado 'Não Deixe para Depois', estas são as minhas metas cadastradas:\n";
+            for (var i = 0; i < listaTarefas.length; i++) {
+                var t = listaTarefas[i];
+                resumo += "- [" + t.area + "] " + t.acao + " (Objetivo: " + t.objetivo + " | Frequência: " + t.frequencia + ")\n";
+            }
+            resumo += "Me envie mensagens motivacionais e me ajude a cumprir essas metas diariamente!";
+            promptEl.textContent = resumo;
+        }
+
+        function desenharTela() {
+            var total = listaTarefas.length;
+            var concluidas = 0;
+            for (var i = 0; i < total; i++) { if (listaTarefas[i].concluido) concluidas++; }
+
+            var pct = total === 0 ? 0 : Math.round((concluidas / total) * 100);
+            document.getElementById("textoPorcentagem").textContent = pct + "%";
+            document.getElementById("barraProgresso").style.width = pct + "%";
+            document.getElementById("contagemTarefas").textContent = concluidas + " de " + total + " concluídas";
+
+            var container = document.getElementById("listaPlano");
+            container.innerHTML = "";
+
+            if (total === 0) {
+                var divVazio = document.createElement("div");
+                divVazio.className = "vazio";
+                divVazio.innerHTML = 'Seu plano está vazio.<br>Clique em <strong>"+ Adicionar Nova Meta"</strong> acima ou em <strong>"✨ Exemplo"</strong>.';
+                container.appendChild(divVazio);
+                return;
+            }
+
+            for (var j = 0; j < listaTarefas.length; j++) {
+                var t = listaTarefas[j];
+                var div = document.createElement("div");
+                div.className = t.concluido ? "item-plano concluido" : "item-plano";
+
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = t.concluido;
+                (function(idTask) {
+                    checkbox.onchange = function() { alternarConclusao(idTask); };
+                })(t.id);
+
+                var conteudoItem = document.createElement("div");
+                conteudoItem.className = "conteudo-item";
+
+                var spanEtiqueta = document.createElement("span");
+                spanEtiqueta.className = "etiqueta-area";
+                spanEtiqueta.textContent = t.area;
+
+                var divAcao = document.createElement("div");
+                divAcao.className = "texto-acao";
+                divAcao.textContent = t.acao;
+
+                var divObjetivo = document.createElement("div");
+                divObjetivo.className = "texto-objetivo";
+                divObjetivo.textContent = "Objetivo: " + t.objetivo;
+
+                var rodapeItem = document.createElement("div");
+                rodapeItem.className = "rodape-item";
+
+                var spanInfo = document.createElement("span");
+                spanInfo.style.color = "#4a5568";
+                var partesData = t.prazo.split("-");
+                var dataBR = partesData[2] + "/" + partesData[1] + "/" + partesData[0];
+                spanInfo.textContent = "🔄 " + t.frequencia + " • 📅 " + dataBR;
+
+                var linkAgenda = document.createElement("a");
+                linkAgenda.className = "link-agenda";
+                linkAgenda.href = gerarLinkGoogleAgenda(t);
+                linkAgenda.target = "_blank";
+                linkAgenda.textContent = "📅 Agendar no Google Agenda";
+
+                rodapeItem.appendChild(spanInfo);
+                rodapeItem.appendChild(linkAgenda);
+
+                conteudoItem.appendChild(spanEtiqueta);
+                conteudoItem.appendChild(divAcao);
+                conteudoItem.appendChild(divObjetivo);
+                conteudoItem.appendChild(rodapeItem);
+
+                var btnExcluir = document.createElement("button");
+                btnExcluir.type = "button";
+                btnExcluir.className = "btn-excluir";
+                btnExcluir.textContent = "×";
+                (function(idTask) {
+                    btnExcluir.onclick = function() { removerItem(idTask); };
+                })(t.id);
+
+                div.appendChild(checkbox);
+                div.appendChild(conteudoItem);
+                div.appendChild(btnExcluir);
+
+                container.appendChild(div);
+            }
+        }
+
+        function carregarExemplo() {
+            var hoje = new Date().toISOString().split("T")[0];
+            var ex = [
+                { id: Date.now()+1, area: "Hidratação", acao: "Deixar garrafa de 500ml na mesa e beber 2x ao dia", objetivo: "Manter energia e foco", frequencia: "Todos os dias", prazo: hoje, concluido: true },
+                { id: Date.now()+2, area: "Consultas Preventivas", acao: "Verificar data do último check-up e agendar consulta", objetivo: "Prevenção em dia", frequencia: "Ação única", prazo: hoje, concluido: false }
+            ];
+            listaTarefas = ex.concat(listaTarefas);
+            salvarEAtualizar();
+            irParaEtapa(4);
+        }
+
+        desenharTela();
+        atualizarPromptIA();
+    </script>
+</body>
+</html>
