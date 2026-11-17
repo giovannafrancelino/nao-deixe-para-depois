@@ -192,40 +192,48 @@
         .box-voce-sabia p { font-size: 12px; color: #2d3748; margin-bottom: 3px; }
         .box-voce-sabia small { font-size: 10px; color: #718096; font-style: italic; }
 
-        /* Estilo Notificação Fofa do Zelo */
-        .comentario-zelo-acao {
-            background: linear-gradient(135deg, #fff0f5 0%, #ebf8ff 100%);
-            border: 1px solid #fed7e2;
-            border-left: 4px solid #d53f8c;
-            border-radius: 10px;
-            padding: 12px 15px;
+        /* Estilo Balão de Fala do Zelo (Diferente da caixa científica) */
+        .balao-zelo {
+            background-color: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-radius: 12px;
+            padding: 14px;
             margin-bottom: 15px;
             display: none;
-            box-shadow: 0 4px 12px rgba(213, 63, 140, 0.1);
-            animation: fadeIn 0.3s ease-in-out;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(49, 130, 206, 0.1);
         }
 
-        .notif-header {
+        .balao-zelo-topo {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            font-weight: bold;
-            color: #d53f8c;
+            gap: 8px;
             margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .notif-corpo {
+        .icone-zelo-mini {
+            width: 24px;
+            height: 24px;
+            background-color: #3182ce;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .balao-zelo-topo span {
+            font-size: 12px;
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+
+        .balao-zelo p {
             font-size: 13px;
             color: #2d3748;
-            font-weight: 500;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
+            padding-left: 32px;
         }
 
         .botoes-wizard {
@@ -563,7 +571,7 @@
                 </div>
                 <div class="fala-mascote">
                     <h4>Olá! Eu sou o Zelo, seu assistente de saúde!</h4>
-                    <p id="fraseMascote">Campanhas de prevenção acontecem o ano todo, mas o que te impede de agir hoje?</p>
+                    <p id="fraseMascote">Campanhas de prevenção acontecem o ano todo, mas o que te impede de agir hoje? Quais planos e hábitos está executando? </p>
                 </div>
             </div>
 
@@ -607,12 +615,13 @@
                 <small id="fonteCuriosidade"></small>
             </div>
 
-            <!-- Notificação Fofa do Zelo -->
-            <div id="comentarioZelo" class="comentario-zelo-acao">
-                <div class="notif-header">
-                    <span>💬 Dica do Zelo</span>
+            <!-- Balão de Fala Diferenciado do Zelo -->
+            <div id="comentarioZelo" class="balao-zelo">
+                <div class="balao-zelo-topo">
+                    <div class="icone-zelo-mini">🤖</div>
+                    <span>Dica do Zelo:</span>
                 </div>
-                <div class="notif-corpo" id="textoZeloNotif"></div>
+                <p id="textoZeloNotif"></p>
             </div>
 
             <div class="campo">
@@ -734,7 +743,7 @@
             "Hidratação": {
                 curiosidade: "A desidratação leve reduz o foco e aumenta o cansaço no ambiente de trabalho.",
                 fonte: "Fonte: Ministério da Saúde.",
-                comentarioFofo: "💧 Um brinde a esta escolha! Levante garrafa de água rsrs.",
+                comentarioFofo: "💧 Um brinde a esta escolha! Levante sua garrafa de água rsrs.",
                 sugestoes: [
                     "Deixar uma garrafa de 500ml na mesa e reabastecer 2x ao dia",
                     "Beber 1 copo de água logo ao acordar",
@@ -873,7 +882,7 @@
             document.getElementById("fonteCuriosidade").textContent = info.fonte;
             box.style.display = "block";
 
-            // Exibe a notificação fofa do Zelo
+            // Exibe o balão de fala do Zelo
             textoZeloNotif.textContent = info.comentarioFofo;
             comentarioZelo.style.display = "block";
 
