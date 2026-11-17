@@ -495,42 +495,6 @@
         }
         .btn-ia-gemini:hover { background-color: #3367d6; }
 
-        /* Estilo da Nova Tela de Sucesso (Etapa 5) */
-        .tela-sucesso {
-            text-align: center;
-            padding: 20px 10px;
-        }
-        .icone-sucesso {
-            font-size: 50px;
-            margin-bottom: 15px;
-        }
-        .tela-sucesso h3 {
-            color: #2b6cb0;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-        .tela-sucesso p {
-            font-size: 14px;
-            color: #4a5568;
-            margin-bottom: 20px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .caixa-recado-zelo {
-            background-color: #fff0f5;
-            border: 1px solid #f687b3;
-            border-radius: 10px;
-            padding: 15px;
-            font-size: 13px;
-            color: #702459;
-            margin-bottom: 25px;
-            text-align: left;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
         .aviso-etico {
             max-width: 750px;
             margin: 20px auto;
@@ -554,6 +518,46 @@
             font-size: 12px;
             color: #718096;
             margin-top: auto;
+        }
+
+        .tela-sucesso {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .icone-sucesso {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .tela-sucesso h3 {
+            color: #2b6cb0;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .tela-sucesso > p {
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .caixa-recado-zelo {
+            background-color: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .caixa-recado-zelo strong {
+            color: #2b6cb0;
+            font-size: 14px;
+        }
+        .caixa-recado-zelo div div {
+            font-size: 13px;
+            color: #2d3748;
+            margin-top: 4px;
+            font-style: italic;
         }
 
         @media print {
@@ -740,8 +744,7 @@
                     <button type="button" class="btn-secundario" onclick="irParaEtapa(2)">+ Adicionar Nova Meta</button>
                 </div>
                 <div>
-                    <button type="button" class="btn-pdf" onclick="window.print()">🖨️ PDF</button>
-                    <button type="button" class="btn-secundario" onclick="carregarExemplo()">✨ Exemplo</button>
+                    <button type="button" class="btn-pdf" onclick="window.print()">🖨️ BAIXAR PDF</button>
                 </div>
             </div>
 
@@ -750,7 +753,7 @@
             <div class="caixa-prompt-ia">
                 <h4>🤖 Copie seu plano automatizado para a IA</h4>
                 <p>O prompt abaixo já inclui todas as suas metas cadastradas. Basta copiar e colar na sua IA favorita para receber apoio diário:</p>
-                <div class="bloco-codigo-prompt" id="textoPromptAI">Atue como meu coach de bem-estar pessoal. Meu plano de autocuidado 'Não Deixe para Depois' contém as seguintes metas: Nenhuma meta cadastrada. Me ajude a mantê-las!</div>
+                <div class="bloco-codigo-prompt" id="textoPromptAI">Atue como meu coach de bem-estar pessoal. Meu plano de autocuidado 'Não Deixe para Depois' contém as seguintes metas: Nenhuma meta cadastrada. Me ajude a começar!</div>
                 <div class="botoes-ia-container">
                     <a href="https://chatgpt.com/" target="_blank" class="btn-ia-chatgpt">💬 Abrir ChatGPT</a>
                     <a href="https://gemini.google.com/" target="_blank" class="btn-ia-gemini">✨ Abrir Gemini</a>
@@ -774,7 +777,7 @@
                     <div style="font-size: 24px;">🤖</div>
                     <div>
                         <strong>Mensagem do Zelo:</strong><br>
-                        "Consistência vale muito mais do que perfeição. Lembre-se de cumprir suas microações diárias e conte comigo para te ajudar a manter o foco!"
+                        "A hora é agora! Desafio você cumprir pelo menos uma ação no dia de hoje! Lembre-se de manter e cumprir suas microações diárias e conte comigo para te ajudar a manter o foco!"
                     </div>
                 </div>
 
@@ -794,7 +797,7 @@
     </div>
 
     <footer>
-        UNICID Virtual • Sistemas de Informação • 2026
+       Giovanna Francelino • UNICID • Sistemas de Informação • 2026
     </footer>
 
     <script>
@@ -802,7 +805,7 @@
             "Hidratação": {
                 curiosidade: "A desidratação leve reduz o foco e aumenta o cansaço no ambiente de trabalho.",
                 fonte: "Fonte: Ministério da Saúde. Disponível em: <a href='https://www.gov.br/saude' target='_blank'>Portal Gov.br</a>",
-                comentarioFofo: "💧 Um brinde a esta escolha! Levante garrafa de água rsrs.",
+                comentarioFofo: "💧 Um brinde a esta escolha! Levante SUA garrafa de água rsrs.",
                 sugestoes: [
                     "Deixar uma garrafa de 500ml na mesa e reabastecer 2x ao dia",
                     "Beber 1 copo de água logo ao acordar",
@@ -893,7 +896,7 @@
 
             for (var j = 1; j <= 5; j++) {
                 var ind = document.getElementById('indicator-' + j);
-                if(ind) {
+                if (ind) {
                     ind.classList.remove('active', 'completed');
                     if (j < numEtapa) {
                         ind.classList.add('completed');
@@ -1070,7 +1073,7 @@
         function atualizarPromptIA() {
             var promptEl = document.getElementById("textoPromptAI");
             if (listaTarefas.length === 0) {
-                promptEl.textContent = "Atue como meu coach de bem-estar pessoal. Meu plano 'Não Deixe para Depois' está vazio no momento. Me ajude a começar!";
+                promptEl.textContent = "Atue como meu coach de bem-estar pessoal. Com base no meu plano de autocuidado 'Não Deixe para Depois', estas são as minhas metas cadastradas: Nenhuma meta cadastrada. Me envie mensagens motivacionais e me ajude a cumprir essas metas diariamente! (Opcional e limitado ao Gemini: adicionar à agenda do Google).";
                 return;
             }
             var resumo = "Atue como meu coach de bem-estar pessoal. Com base no meu plano de autocuidado 'Não Deixe para Depois', estas são as minhas metas cadastradas:\n";
@@ -1078,7 +1081,7 @@
                 var t = listaTarefas[i];
                 resumo += "- [" + t.area + "] " + t.acao + " (Objetivo: " + t.objetivo + " | Frequência: " + t.frequencia + ")\n";
             }
-            resumo += "Me envie mensagens motivacionais e me ajude a cumprir essas metas diariamente!";
+            resumo += "Me envie mensagens motivacionais e me ajude a cumprir essas metas diariamente! (Opcional e limitado ao Gemini: adicionar à agenda do Google).";
             promptEl.textContent = resumo;
         }
 
@@ -1098,7 +1101,7 @@
             if (total === 0) {
                 var divVazio = document.createElement("div");
                 divVazio.className = "vazio";
-                divVazio.innerHTML = 'Seu plano está vazio.<br>Clique em <strong>"+ Adicionar Nova Meta"</strong> acima ou em <strong>"✨ Exemplo"</strong>.';
+                divVazio.innerHTML = 'Seu plano está vazio.<br>Clique em <strong>"+ Adicionar Nova Meta"</strong> acima.';
                 container.appendChild(divVazio);
                 return;
             }
@@ -1167,17 +1170,6 @@
 
                 container.appendChild(div);
             }
-        }
-
-        function carregarExemplo() {
-            var hoje = new Date().toISOString().split("T")[0];
-            var ex = [
-                { id: Date.now()+1, area: "Hidratação", acao: "Deixar garrafa de 500ml na mesa e beber 2x ao dia", objetivo: "Manter energia e foco", frequencia: "Todos os dias", prazo: hoje, concluido: true },
-                { id: Date.now()+2, area: "Consultas Preventivas", acao: "Verificar data do último check-up e agendar consulta", objetivo: "Prevenção em dia", frequencia: "Ação única", prazo: hoje, concluido: false }
-            ];
-            listaTarefas = ex.concat(listaTarefas);
-            salvarEAtualizar();
-            irParaEtapa(4);
         }
 
         desenharTela();
